@@ -10,7 +10,8 @@ const update = (collectionsDirectory, collection, updateObject) => {
             // Params verification: start
             if (!collectionsDirectory) {
                 const result = {
-                    message: 'Collections directory was not defined'
+                    message: 'Collections directory was not defined',
+                    status: 400
                 };
 
                 resolve(result);
@@ -18,7 +19,8 @@ const update = (collectionsDirectory, collection, updateObject) => {
 
             if (!collection) {
                 const result = {
-                    message: 'Collection was not defined'
+                    message: 'Collection was not defined',
+                    status: 400
                 };
 
                 resolve(result);
@@ -26,7 +28,8 @@ const update = (collectionsDirectory, collection, updateObject) => {
 
             if (!updateObject) {
                 const result = {
-                    message: 'Object to read query not defined'
+                    message: 'Object to read query not defined',
+                    status: 400
                 };
 
                 resolve(result);
@@ -52,12 +55,17 @@ const update = (collectionsDirectory, collection, updateObject) => {
                             fs.writeFileSync(collectionsDirectory + object._id, JSON.stringify(newObject));
                         }
                         
-                        const result = documents;
+                        const result = {
+                            message: `${documents.length} ${documents.length > 1 ? ' documents' : ' document'} updated successfuly`,
+                            status: 200,
+                            result: documents
+                        }
     
                         resolve(result);
                     } else {
                         const result = {
                             message: 'No document found',
+                            status: 202,
                             result: documents
                         }
     
@@ -79,7 +87,8 @@ const updateById = (collectionsDirectory, collection, id, updateObject) => {
             // Params verification: start
             if (!collectionsDirectory) {
                 const result = {
-                    message: 'Collections directory was not defined'
+                    message: 'Collections directory was not defined',
+                    status: 400
                 };
 
                 resolve(result);
@@ -87,7 +96,8 @@ const updateById = (collectionsDirectory, collection, id, updateObject) => {
 
             if (!collection) {
                 const result = {
-                    message: 'Collection was not defined'
+                    message: 'Collection was not defined',
+                    status: 400
                 };
 
                 resolve(result);
@@ -95,7 +105,8 @@ const updateById = (collectionsDirectory, collection, id, updateObject) => {
 
             if (!id) {
                 const result = {
-                    message: 'Id not defined'
+                    message: 'Id not defined',
+                    status: 400
                 };
 
                 resolve(result);
@@ -122,13 +133,18 @@ const updateById = (collectionsDirectory, collection, id, updateObject) => {
                             fs.writeFileSync(collectionsDirectory + object._id, JSON.stringify(newObject));
                         }
                         
-                        const result = documents;
+                        const result = {
+                            message: `${documents.length} ${documents.length > 1 ? ' documents' : ' document'} updated successfuly`,
+                            status: 200,
+                            result: documents
+                        }
     
                         resolve(result);
                     }
 
                     const result = {
                         message: 'No document found',
+                        status: 202,
                         result: documents
                     }
 
