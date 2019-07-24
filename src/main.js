@@ -33,7 +33,7 @@ const update = (collectionsDirectory, collection, updateObject) => {
             }
             // Params verification: end
             
-            readDocumentPackage.read(collectionsDirectory, collection, updateObject.conditions)
+            readDocumentPackage.read(collectionsDirectory, collection, updateObject.conditions, updateObject.options)
                 .then(res => {
                     const documents = [];
                     collection = collection.toLowerCase();
@@ -102,7 +102,7 @@ const updateById = (collectionsDirectory, collection, id, updateObject) => {
             }
             // Params verification: end
 
-            readDocumentPackage.readById(collectionsDirectory, collection, id)
+            readDocumentPackage.readById(collectionsDirectory, collection, id, updateObject.options)
                 .then(res => {
                     const documents = [];
                     collection = collection.toLowerCase();
